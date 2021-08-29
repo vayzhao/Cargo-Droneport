@@ -33,14 +33,20 @@ public class Blackboard : MonoBehaviour
         "enough to insert a new pathing dot when drawing paths")]
     public const float DISTANCE_DOT_GAP = 10f;
 
+    [Tooltip("distance to determine whether or not the drone is close to objective")]
+    public const float DISTANCE_OBJECTIVE_REACH = 5f;
+
     [Tooltip("max height of the pathing network")]
-    public const float MAX_MAP_HEIGHT = 50f;
+    public const float MAP_HEIGHT_MAX = 50f;
+
+    [Tooltip("min height of the pathing network")]
+    public const float MAP_HEIGHT_MIN = 1.75f;
 
     [Tooltip("speed ratio for a drone to turn")]
     public const float SPEED_RATIO_ROTATION = 0.2f;
 
     [Tooltip("speed ratio for a drone to takeoff/land")]
-    public const float SPEED_RATIO_VERTICLE = 0.3f;
+    public const float SPEED_RATIO_VERTICLE = 0.65f;
 
     #endregion
 
@@ -53,6 +59,12 @@ public class Blackboard : MonoBehaviour
 
     [Tooltip("a layer mask for ray cast to find the invisible ceiling")]
     public static int ceilingMask = LayerMask.GetMask("PathHeight");
+
+    [Tooltip("a layer mask for ray cast to find the objective targets")]
+    public static int objectiveMask = LayerMask.GetMask("Objective");
+
+    [Tooltip("the default layer mask")]
+    public static int defaultMask = LayerMask.GetMask("Default");
 
     [Tooltip("a transform to hold all spawning cache")]
     public static Transform spawnHolder;

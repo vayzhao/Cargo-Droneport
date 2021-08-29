@@ -23,7 +23,7 @@ public class DronePath : MonoBehaviour
         // reset height for the invisible ceiling
         pathHeightCol.transform.position = new Vector3(
             pathHeightCol.transform.position.x,
-            Blackboard.MAX_MAP_HEIGHT,
+            Blackboard.MAP_HEIGHT_MAX,
             pathHeightCol.transform.position.z);
 
     }
