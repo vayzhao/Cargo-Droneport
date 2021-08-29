@@ -23,6 +23,13 @@ public class Blackboard : MonoBehaviour
     public const float MAINCAM_VIEW_MIN = 20f;
     public const float MAINCAM_VIEW_MAX = 100f;
 
+    // distance to determine whether or not the drone has reach a dot
+    public const float DISTANCE_DOT_REACH = 0.2f;
+
+    // path drawing: to determine whether or not the distance is 
+    // greate enough to insert a new dot
+    public const float DISTANCE_DOT_GAP = 10f;
+
     #endregion
 
     #region Static Variables

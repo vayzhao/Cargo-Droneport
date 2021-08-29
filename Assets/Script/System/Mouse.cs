@@ -10,10 +10,12 @@ public class Mouse : MonoBehaviour
 {
     public TooltipBox tooltipBox;          // parent object for tooltip box
     private TrackingWindow trackingWindow; // parent object for tracking window
+    private DronePath dronePath;
 
     private void Start()
     {
-        trackingWindow = FindObjectOfType<TrackingWindow>();
+        dronePath = GetComponent<DronePath>();
+        trackingWindow = FindObjectOfType<TrackingWindow>();        
     }
 
     private void Update()
@@ -74,10 +76,11 @@ public class Mouse : MonoBehaviour
         RaycastHit hit;
 
         // use sphere cast to capture drones
-        if (Physics.SphereCast(ray, 3f, out hit) && hit.collider.tag == "Drone")
+        if (Physics.SphereCast(ray, 1f, out hit) && hit.collider.tag == "Drone")
         {
             // when drone is captured, issue the second camera to track it
-            trackingWindow.TrackObject(hit.collider.gameObject);
+            // trackingWindow.TrackObject(hit.collider.gameObject);
+            dronePath.Select(hit.collider.gameObject);
         }
     }
 
