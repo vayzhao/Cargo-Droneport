@@ -4,33 +4,28 @@ using UnityEngine;
 
 public class DronePath : MonoBehaviour
 {
-
-
-    private Drone theDrone;
-    public GameObject selectionFx;
-    private bool isSelected;
-    private Vector3 lastHitPoint;
-    public MeshCollider pathHeightCol;
+    [Header("Objects")]
+    [Tooltip("Pathing dot prefab object")]
     public GameObject pathingDot;
-    public float maxHeight = 35f;
+    [Tooltip("Visual effect to display when the drone is selected")]
+    public GameObject selectionFx;
+    [Tooltip("Mesh collider for the ceiling, the ceiling is used for referencing" +
+        "the maximum height of the pathing network")]
+    public MeshCollider pathHeightCol;
 
-    private Transform spawnHolder;
-    private int heightMask;
+    private Drone theDrone;         // the drone class of the selected drone
+    private bool isSelected;        // determine whether or not the drone is being selected
+    private Vector3 lastHitPoint;   // to record the last mouse position when drawing pathing dots
 
     // Start is called before the first frame update
     void Start()
-    {
-        // find spawn holder of pathing dot fx
-        spawnHolder = selectionFx.transform.parent;
-        
+    {      
         // reset height for the invisible ceiling
         pathHeightCol.transform.position = new Vector3(
             pathHeightCol.transform.position.x,
-            maxHeight,
+            Blackboard.MAX_MAP_HEIGHT,
             pathHeightCol.transform.position.z);
 
-        // get layer mask of the invisible ceiling
-        heightMask = LayerMask.GetMask("PathHeight");
     }
 
     // Update is called once per frame
@@ -40,6 +35,10 @@ public class DronePath : MonoBehaviour
             DrawingPath();
     }
 
+    /// <summary>
+    /// It's called via Mouse.cs when a drone is selected
+    /// </summary>
+    /// <param name="drone">the selected drone</param>
     public void Select(GameObject drone)
     {
         // switch isSelected to true and enable ceiling collider
@@ -55,6 +54,10 @@ public class DronePath : MonoBehaviour
         lastHitPoint = drone.transform.position;
     }
 
+    /// <summary>
+    /// It's called when the user let go the left-click while the drone
+    /// is being selected
+    /// </summary>
     public void Deselect()
     {
         // switch isSelected to false and hide selectionFx
@@ -70,6 +73,12 @@ public class DronePath : MonoBehaviour
         theDrone.Deselected();
     }
 
+    /// <summary>
+    /// It's called every frame when a drone is being selected, this method
+    /// will keep binding the selectionFx to the drone and also check the 
+    /// mouse position every frame, when the current mouse position is greater
+    /// than the previous mouse position, insert a pathing dot
+    /// </summary>
     void DrawingPath()
     {
         // update selectionFx's position
@@ -78,7 +87,7 @@ public class DronePath : MonoBehaviour
         // check to see if the user has let go the mouse
         // base case: deselect the drone
         // otherwise: insert a new dot
-        if (Input.GetMouseButtonUp(1))
+        if (Input.GetMouseButtonUp(0))
         {
             Deselect();
         }
@@ -88,6 +97,10 @@ public class DronePath : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Method to insert a pathing dot
+    /// </summary>
+    /// <param name="minDistance">requred gap distance</param>
     void InsertDot(float minDistance)
     {
         // get mouse position and create a ray shooting from camera to the mouse position
@@ -96,7 +109,7 @@ public class DronePath : MonoBehaviour
 
         // create a raycasthit to capture the mouse position in a specific height
         RaycastHit hit;
-        if (Physics.Raycast(mouseRay, out hit, Mathf.Infinity, heightMask))
+        if (Physics.Raycast(mouseRay, out hit, Mathf.Infinity, Blackboard.ceilingMask))
         {
             // find this hit point
             var thisHitPoint = hit.point;
@@ -108,7 +121,7 @@ public class DronePath : MonoBehaviour
                 lastHitPoint = thisHitPoint;
 
                 // create a new pathing dot
-                var dot = Instantiate(pathingDot, spawnHolder);
+                var dot = Instantiate(pathingDot, Blackboard.spawnHolder);
                 dot.transform.position = lastHitPoint;
 
                 // add this pathing dot and position into the drone's data

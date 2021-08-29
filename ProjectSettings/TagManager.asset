@@ -6,11 +6,12 @@ TagManager:
   tags:
   - SecondCamera
   - Drone
+  - CacheHolder
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - PathHeight
   - Water
   - UI
   - Environment
