@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum DroneFSM
 {
@@ -13,6 +14,35 @@ public enum LandPurpose
 {
     Collect,
     Place
+}
+
+public class CarriedItem
+{
+    private Item item;
+    private Transform package;
+    private Transform carrier;
+    private GameObject matIcon;
+    
+    public CarriedItem(Mat theMat, Transform carrier)
+    {
+        // binding carrier and item type
+        this.carrier = carrier;
+        this.item = theMat.item;        
+
+        // parent the box and reset its local position
+        package = theMat.box;
+        package.parent = carrier;
+        package.localPosition = new Vector3(0f, -0.075f, 0f);
+
+        // create an icon above the carrier
+        matIcon = Blackboard.imageManager.CreateImage();
+        matIcon.GetComponent<Image>().sprite = item.sprite;
+    }
+
+    public void UpdateIconPosition(Vector3 origin, int index)
+    {
+        matIcon.transform.position = origin + new Vector3(index * 50f,0f,0f);
+    }
 }
 
 public class Drone : MonoBehaviour
@@ -29,10 +59,13 @@ public class Drone : MonoBehaviour
 
     private Mat manipulatedMat;
     private Demand manipulatedDemand;
-    private Transform carriedBox;
+    
     private Vector3 landingPos;
     private Vector3 posBeforeLand;
-    
+
+    private List<CarriedItem> carriedItems;
+    private Transform carriedBox;
+    private Image carriedBoxIcon;
 
 
     [HideInInspector]
@@ -53,10 +86,13 @@ public class Drone : MonoBehaviour
 
     private void Reset()
     {
-        pathingLine = GetComponent<LineRenderer>();
+        animator = GetComponent<Animator>();
+
         pathingLocs = new List<Vector3>();
         pathingDots = new List<GameObject>();
-        animator = GetComponent<Animator>();
+        pathingLine = GetComponent<LineRenderer>();
+
+        carriedItems = new List<CarriedItem>();
     }
 
     // Update is called once per frame
@@ -76,6 +112,8 @@ public class Drone : MonoBehaviour
             default:
                 break;
         }
+
+        UpdateCarriedMatIcon();
     }
 
     #region Drone Pathing
@@ -279,10 +317,9 @@ public class Drone : MonoBehaviour
     /// </summary>
     void LandForCollecting()
     {
-        // parent the box and reset its local position
-        carriedBox = manipulatedMat.box;
-        carriedBox.parent = transform;
-        carriedBox.localPosition = new Vector3(0f,-0.075f,0f);
+        // collect this item
+        var carriedItem = new CarriedItem(manipulatedMat, transform);
+        carriedItems.Add(carriedItem);
 
         // finish collecting the package
         manipulatedMat.ReceiveComplete();
@@ -295,6 +332,29 @@ public class Drone : MonoBehaviour
     {
         // finish placing the package
         manipulatedDemand.ReceiveComplete(carriedBox);
+    }
+
+    /// <summary>
+    /// Method to update carried item positions
+    /// </summary>
+    void UpdateCarriedMatIcon()
+    {
+        // return if the drone is not carrying anything
+        if (carriedItems.Count == 0)
+            return;
+
+        // convert drone's position to screen position also
+        // calculate the offset position based on the quantity
+        // of items carried by the drone
+        var origin = Camera.main.WorldToScreenPoint(transform.position);
+        origin.y += 50f;
+        origin.x -= (carriedItems.Count - 1) * 25f;
+
+        // update icon position for each carried item
+        for (int i = 0; i < carriedItems.Count; i++)
+        {
+            carriedItems[i].UpdateIconPosition(origin, i);
+        }
     }
     #endregion
 

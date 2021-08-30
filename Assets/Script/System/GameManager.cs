@@ -7,8 +7,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // find the spawn holder in the game
-        Blackboard.spawnHolder = GameObject.FindGameObjectWithTag("CacheHolder").transform;
+        Blackboard.Initialize();
     }
 
 }

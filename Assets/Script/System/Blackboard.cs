@@ -46,7 +46,7 @@ public class Blackboard : MonoBehaviour
     public const float SPEED_RATIO_ROTATION = 0.2f;
 
     [Tooltip("speed ratio for a drone to takeoff/land")]
-    public const float SPEED_RATIO_VERTICLE = 0.65f;
+    public const float SPEED_RATIO_VERTICLE = 0.65f + 0.35f;
 
     #endregion
 
@@ -69,5 +69,24 @@ public class Blackboard : MonoBehaviour
     [Tooltip("a transform to hold all spawning cache")]
     public static Transform spawnHolder;
 
+    [Tooltip("a manager to handle all item data")]
+    public static ItemManager itemManager;
+
+    [Tooltip("a manager to handle all image components")]
+    public static ImageManager imageManager;
+
+
+
     #endregion
+
+    /// <summary>
+    /// Method to find all core objects in the scene,
+    /// it's called via Gamemanager when the game first starts.
+    /// </summary>
+    public static void Initialize()
+    {
+        itemManager = FindObjectOfType<ItemManager>();
+        imageManager = FindObjectOfType<ImageManager>();
+        spawnHolder = GameObject.FindGameObjectWithTag("CacheHolder").transform;
+    }
 }
