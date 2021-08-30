@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// The script for users to draw paths for drones
+/// <para>Contributor: Weizhao</para>
+/// </summary>
 public class DronePath : MonoBehaviour
 {
     [Header("Objects")]

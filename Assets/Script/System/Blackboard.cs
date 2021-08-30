@@ -2,6 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+#region Enums
+public enum DroneFSM
+{
+    Move,
+    Takeoff,
+    Land
+}
+public enum LandPurpose
+{
+    Collect,
+    Place
+}
+#endregion
 /// <summary>
 /// The blackboard that holds all static and constant variables
 /// <para>Contributor: Weizhao </para>
