@@ -76,6 +76,9 @@ public class Blackboard : MonoBehaviour
     [Tooltip("a layer mask for ray cast to find the objective targets")]
     public static int objectiveMask = LayerMask.GetMask("Objective");
 
+    [Tooltip("The drone layer mask")]
+    public static int droneMask = LayerMask.GetMask("Drone");
+
     [Tooltip("the default layer mask")]
     public static int defaultMask = LayerMask.GetMask("Default");
 
@@ -88,6 +91,8 @@ public class Blackboard : MonoBehaviour
     [Tooltip("a manager to handle all image components")]
     public static ImageManager imageManager;
 
+    [Tooltip("a manager to handle all spawn settings")]
+    public static SpawnManager spawnManager;
 
 
     #endregion
@@ -100,6 +105,7 @@ public class Blackboard : MonoBehaviour
     {
         itemManager = FindObjectOfType<ItemManager>();
         imageManager = FindObjectOfType<ImageManager>();
+        spawnManager = FindObjectOfType<SpawnManager>();
         spawnHolder = GameObject.FindGameObjectWithTag("CacheHolder").transform;
     }
 }

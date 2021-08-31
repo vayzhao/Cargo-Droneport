@@ -26,7 +26,7 @@ public class Drone : MonoBehaviour
     private Vector3 landingPos;
     private Vector3 posBeforeLand;
 
-    private List<Package> packages;
+    public List<Package> packages;
 
     [HideInInspector]
     public List<Vector3> pathingLocs;
@@ -257,6 +257,11 @@ public class Drone : MonoBehaviour
 
                 // switch landing purpose to place
                 landPurpose = LandPurpose.Place;
+            }
+            else
+            {
+                // otherwise return
+                return;
             }
         }
         else

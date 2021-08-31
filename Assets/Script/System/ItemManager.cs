@@ -28,9 +28,15 @@ public class ItemManager : MonoBehaviour
         
     }
 
+    /// <summary>
+    /// Method to return a random index from 0 to the length of allItems
+    /// </summary>
+    /// <returns></returns>
+    public int FetchARandomItemIndex() { return UnityEngine.Random.Range(0, allItems.Length); }
+
     public Item FetchARandomItem()
     {
-        return allItems[UnityEngine.Random.Range(0, allItems.Length)];
+        return allItems[FetchARandomItemIndex()];
     }
 
 }

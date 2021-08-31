@@ -75,8 +75,8 @@ public class Mouse : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
-        // use sphere cast to capture drones
-        if (Physics.SphereCast(ray, 1f, out hit) && hit.collider.tag == "Drone")
+        // use ray cast to capture drones
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity,Blackboard.droneMask))
         {
             // when drone is captured, issue the second camera to track it
             // trackingWindow.TrackObject(hit.collider.gameObject);

@@ -24,6 +24,17 @@ public static class ExtendMethods
                 return true;
             }
         }
+                
         return false;
+    }
+
+    /// <summary>
+    /// Method to pop a random spawning spot from the given list
+    /// </summary>
+    /// <param name="spots">the given spawn spot list</param>
+    /// <returns></returns>
+    public static Spot RandomSpot(this List<Spot> spots)
+    {
+        return spots[UnityEngine.Random.Range(0, spots.Count)];
     }
 }

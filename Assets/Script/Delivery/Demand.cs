@@ -9,20 +9,27 @@ using UnityEngine.UI;
 /// </summary>
 public class Demand : MonoBehaviour
 {
+    private Spot spot;    // the spawn spot used by this demand
     private Transform canvas;  // the canvas to display demand's icon
     private Item requiredItem; // the item data of the demand
     
     /// <summary>
-    /// Method to instantiate a demand class with given itemId
+    /// Method to initialize a demand with 
+    /// given itemId and spawn spot data
     /// </summary>
     /// <param name="itemId"></param>
-    public Demand(int itemId)
+    /// <param name="usedSpot"></param>
+    public void Setup(int itemId, Spot usedSpot)
     {
-        // setup the item
+        // setup the required item
         requiredItem = Blackboard.itemManager.allItems[itemId];
 
+        // bind the used spot
+        spot = usedSpot;
+        spot.SetUsage(false);
+
         // find the canvas
-        canvas.transform.GetChild(0);
+        canvas = transform.GetChild(0);
         canvas.GetComponentInChildren<Image>().sprite = requiredItem.sprite;
     }
 
@@ -57,13 +64,17 @@ public class Demand : MonoBehaviour
         var removeIndex = -1;
         foreach (var item in packages)
         {
-            if (item.Equals(requiredItem))
+            if (item.GetPackageItemId() == requiredItem.itemId)
             {
                 item.Unpatch(transform);
                 removeIndex = packages.IndexOf(item);
             }
         }
-        packages.RemoveAt(removeIndex);
+        var package = packages[removeIndex];
+        packages.Remove(package);
+
+        // free the spawn spot
+        spot.SetUsage(true);
 
         // destroy the demand
         Destroy(this.gameObject, 3f);

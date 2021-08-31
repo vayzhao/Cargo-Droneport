@@ -7,7 +7,7 @@ using UnityEngine;
 /// picked up an material. 
 /// <para>Contributor: Weizhao</para>
 /// </summary>
-public class Package
+public class Package 
 {
     private Item item;          // the item inside the package
     private Transform box;      // the model of the package

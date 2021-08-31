@@ -256,7 +256,7 @@ GameObject:
   - component: {fileID: 1865095750133888040}
   - component: {fileID: 1009171262}
   - component: {fileID: 9022869017618029699}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Drone
   m_TagString: Drone
   m_Icon: {fileID: 0}
@@ -326,9 +326,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a002c2b1fa714374fa1c52b749e936dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 10
-  rotationSpeed: 4
+  isPaused: 0
+  speed: 30
   pathingLocs: []
+  pathingDots: []
 --- !u!120 &9022869017618029699
 LineRenderer:
   m_ObjectHideFlags: 0

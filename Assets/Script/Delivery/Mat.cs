@@ -13,15 +13,22 @@ public class Mat : MonoBehaviour
     public Item item;         // the item data of the material
     [HideInInspector]            
     public Transform box;     // the box model to represents the material
-
+    private Spot spot;   // the sapwn spot used by this material
     private Transform canvas; // the canvas to display material's icon 
 
     /// <summary>
-    /// Method to instantiate a mat class with given itemId 
+    /// Method to initialize a material with given
+    /// itemId and spawn spot data, also find the 
+    /// box model from the child objects
     /// </summary>
     /// <param name="itemId"></param>
-    public Mat(int itemId)
+    /// <param name="usedSpot"></param>
+    public void Setup(int itemId, Spot usedSpot)
     {
+        // bind the used spot
+        spot = usedSpot;
+        spot.SetUsage(false);
+
         // setup the item
         item = Blackboard.itemManager.allItems[itemId];
 
@@ -52,6 +59,9 @@ public class Mat : MonoBehaviour
     /// </summary>
     public void OnReceiveComplete()
     {
+        // free the spawn spot
+        spot.SetUsage(true);
+
         // destroy this gameobject
         Destroy(this.gameObject);
     }    
