@@ -12,6 +12,9 @@ GameObject:
   - component: {fileID: 8208127682609758663}
   - component: {fileID: 8208127682609758666}
   - component: {fileID: 8208127682609758660}
+  - component: {fileID: 1198851239}
+  - component: {fileID: 1198851243}
+  - component: {fileID: 1198851244}
   m_Layer: 0
   m_Name: Game Controller
   m_TagString: Untagged
@@ -74,3 +77,66 @@ MonoBehaviour:
     type: 3}
   selectionFx: {fileID: 0}
   pathHeightCol: {fileID: 0}
+--- !u!114 &1198851239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8208127682609758667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b48f3c22ab83b4b479867c84672fd0b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  matPrefab: {fileID: 3777994162388951451, guid: f34d3bfecd2ebc8448d1b827a4a0d2b4,
+    type: 3}
+  demandPrefab: {fileID: 4001414233653458620, guid: 51016ff871226f14084b156b049018a0,
+    type: 3}
+  spawnSpotParent: {fileID: 0}
+--- !u!114 &1198851243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8208127682609758667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcf2104445b92ea47a4a88a17a78ea2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  allItems:
+  - itemId: 0
+    sprite: {fileID: 21300000, guid: 592fc61b7e7d7044fbcd596dd5945602, type: 3}
+  - itemId: 1
+    sprite: {fileID: 21300000, guid: 897d6a30f26751b49acc4368ff457090, type: 3}
+  - itemId: 2
+    sprite: {fileID: 21300000, guid: 6534cbd0f31779a499c728a176563774, type: 3}
+  - itemId: 3
+    sprite: {fileID: 21300000, guid: 866e7c80635b23247a00e71b3b90fe7a, type: 3}
+  - itemId: 4
+    sprite: {fileID: 21300000, guid: 436a11c0d4c78fe46bebdb6f1db5cc18, type: 3}
+  - itemId: 5
+    sprite: {fileID: 21300000, guid: d400cd17e4919814da6ad67f29d24f9a, type: 3}
+  - itemId: 6
+    sprite: {fileID: 21300000, guid: 717ec723bc3e77d4c9c8e8b04e43d552, type: 3}
+  - itemId: 7
+    sprite: {fileID: 21300000, guid: 84aa4a512e14a7a47941217fa10156a7, type: 3}
+  - itemId: 8
+    sprite: {fileID: 21300000, guid: ff62d753ec7a4b148bf086c2bf7e7f7a, type: 3}
+--- !u!114 &1198851244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8208127682609758667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09d35861cbaae44439d71e3d2ddc44da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fxCanvas: {fileID: 0}
+  iconPrefab: {fileID: 3837549768992318008, guid: 0067be7cf83456e4e9977b4566ea9485,
+    type: 3}
