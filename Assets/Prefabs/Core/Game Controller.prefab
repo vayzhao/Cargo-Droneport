@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 1198851239}
   - component: {fileID: 1198851243}
   - component: {fileID: 1198851244}
+  - component: {fileID: 465622960}
   m_Layer: 0
   m_Name: Game Controller
   m_TagString: Untagged
@@ -139,4 +140,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fxCanvas: {fileID: 0}
   iconPrefab: {fileID: 3837549768992318008, guid: 0067be7cf83456e4e9977b4566ea9485,
+    type: 3}
+  textPrefab: {fileID: 628319620456849428, guid: 67a76b936b8795b4ba4f5e2769b4d390,
+    type: 3}
+--- !u!114 &465622960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8208127682609758667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c7415bec70cf2a489ef395ccc62d713, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  droneData: []
+  collisionFx: {fileID: 1892078723244562, guid: 46876a2780737ec45a19d62f88e5ce56,
     type: 3}

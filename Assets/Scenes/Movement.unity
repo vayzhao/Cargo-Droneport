@@ -514,14 +514,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1818013669}
     m_Modifications:
-    - target: {fileID: 1009171262, guid: c88f8b79fbb6b9e40902b8b4e74cf8f6, type: 3}
-      propertyPath: speed
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 1009171262, guid: c88f8b79fbb6b9e40902b8b4e74cf8f6, type: 3}
-      propertyPath: movementSpeed
-      value: 20
-      objectReference: {fileID: 0}
     - target: {fileID: 7138599166164890009, guid: c88f8b79fbb6b9e40902b8b4e74cf8f6,
         type: 3}
       propertyPath: m_Name
@@ -582,13 +574,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9022869017618029699, guid: c88f8b79fbb6b9e40902b8b4e74cf8f6,
-        type: 3}
-      propertyPath: m_Positions.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 7138599166164890008, guid: c88f8b79fbb6b9e40902b8b4e74cf8f6, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c88f8b79fbb6b9e40902b8b4e74cf8f6, type: 3}
 --- !u!1 &589364132
 GameObject:
