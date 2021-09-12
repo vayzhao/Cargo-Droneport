@@ -7,7 +7,6 @@ using UnityEngine;
 public class Item {
     public int itemId;
     public Sprite sprite;
-
 }
 
 public class ItemManager : MonoBehaviour

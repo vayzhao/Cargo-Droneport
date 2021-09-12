@@ -68,6 +68,7 @@ public class Demand : MonoBehaviour
             {
                 item.Unpatch(transform);
                 removeIndex = packages.IndexOf(item);
+                break;
             }
         }
         var package = packages[removeIndex];
@@ -89,7 +90,7 @@ public class Demand : MonoBehaviour
     /// </summary>
     void Reward()
     {
-        // calculate box's position
+        // re-calculate box's position
         var boxPos = spot.position;
         boxPos.y = Blackboard.MAP_HEIGHT_MIN;
 
