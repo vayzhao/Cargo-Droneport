@@ -45,6 +45,7 @@ public class TrackingWindow : MonoBehaviour
     {
         // obtain tracking window's rect transform
         rect = GetComponent<RectTransform>();
+        zoomScale = rect.sizeDelta.x;
 
         // obtain tracking window's boarder and disable it
         backgroundImg = GetComponent<Image>();

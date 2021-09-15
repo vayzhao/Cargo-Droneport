@@ -10,24 +10,24 @@ using UnityEngine.UI;
 
 public class Drone : MonoBehaviour
 {
+    public float speed = 30f;
+    public int capacity = 3;
+
     private DroneFSM fsm;
     private LandPurpose landPurpose;
-
-    public float speed = 10f;
-
     private int pathingIndex;
     private LineRenderer pathingLine;
     private Animator animator;
     private BoxCollider boxCollider;
-
     private Mat manipulatedMat;
-    private Demand manipulatedDemand;
-    
+    private Demand manipulatedDemand;    
     private Vector3 landingPos;
     private Vector3 posBeforeLand;
 
+    [HideInInspector]
+    public float currentSpeed;
+    [HideInInspector]
     public List<Package> packages;
-
     [HideInInspector]
     public List<Vector3> pathingLocs;
     [HideInInspector]
@@ -36,24 +36,21 @@ public class Drone : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Reset();
-
-        // initially, the drone takes off
-        fsm = DroneFSM.Takeoff;
-        posBeforeLand = transform.position;
-        posBeforeLand.y = Blackboard.MAP_HEIGHT_MAX;        
-    }
-
-    private void Reset()
-    {
+        // find core components of the drone
         animator = GetComponent<Animator>();
         boxCollider = GetComponent<BoxCollider>();
-
-        pathingLocs = new List<Vector3>();
-        pathingDots = new List<GameObject>();
         pathingLine = GetComponent<LineRenderer>();
 
+        // initialize packages and pathing data
         packages = new List<Package>();
+        pathingLocs = new List<Vector3>();
+        pathingDots = new List<GameObject>();
+        
+        // initially, the drone takes off
+        fsm = DroneFSM.Takeoff;
+        currentSpeed = speed;
+        posBeforeLand = transform.position;
+        posBeforeLand.y = Blackboard.MAP_HEIGHT_MAX;        
     }
 
     // Update is called once per frame
@@ -150,9 +147,9 @@ public class Drone : MonoBehaviour
         // calculate the moving position and rotation
         var destPos = pathingLocs[pathingIndex];
         var prevPos = this.transform.position;
-        var nextPos = Vector3.MoveTowards(prevPos, destPos, speed * Time.deltaTime);
+        var nextPos = Vector3.MoveTowards(prevPos, destPos, currentSpeed * Time.deltaTime);
         var destRot = Quaternion.LookRotation(destPos - prevPos);
-        var nextRot = Quaternion.Lerp(transform.rotation, destRot, Mathf.Min(1f, speed * Blackboard.SPEED_RATIO_ROTATION * Time.deltaTime));
+        var nextRot = Quaternion.Lerp(transform.rotation, destRot, Mathf.Min(1f, currentSpeed * Blackboard.SPEED_RATIO_ROTATION * Time.deltaTime));
 
         // actual move the drone
         transform.position = nextPos;
@@ -183,7 +180,7 @@ public class Drone : MonoBehaviour
     void TakeOff()
     {
         // drone taking off
-        transform.position = Vector3.MoveTowards(transform.position, posBeforeLand, speed * Blackboard.SPEED_RATIO_VERTICLE * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, posBeforeLand, currentSpeed * Blackboard.SPEED_RATIO_VERTICLE * Time.deltaTime);
 
         // check to see if the drone has finished taking off
         if ((transform.position - posBeforeLand).sqrMagnitude < Blackboard.DISTANCE_DOT_REACH)
@@ -199,7 +196,7 @@ public class Drone : MonoBehaviour
     void Land()
     {
         // drone landing
-        transform.position = Vector3.MoveTowards(transform.position, landingPos, speed * Blackboard.SPEED_RATIO_VERTICLE * Time.deltaTime); 
+        transform.position = Vector3.MoveTowards(transform.position, landingPos, currentSpeed * Blackboard.SPEED_RATIO_VERTICLE * Time.deltaTime); 
 
         // check to see if the drone has finished landing
         if ((transform.position-landingPos).sqrMagnitude < Blackboard.DISTANCE_DOT_REACH)
@@ -285,14 +282,24 @@ public class Drone : MonoBehaviour
         var target = objective[0].transform;
         if (target.GetComponent<Mat>())
         {
-            // find the mat component of the target
-            manipulatedMat = target.GetComponent<Mat>();
+            // check to see if the drone has enough capacity
+            // to pick up this mat
+            if (packages.Count < capacity)
+            {
+                // find the mat component of the target
+                manipulatedMat = target.GetComponent<Mat>();
 
-            // trigger mat's receive function
-            manipulatedMat.OnReceive();
+                // trigger mat's receive function
+                manipulatedMat.OnReceive();
 
-            // switch landing purpose to collect
-            landPurpose = LandPurpose.Collect;
+                // switch landing purpose to collect
+                landPurpose = LandPurpose.Collect;
+            }
+            else
+            {
+                // otherwise return
+                return;
+            }            
         }
         else if (target.GetComponent<Demand>())
         {
@@ -342,6 +349,9 @@ public class Drone : MonoBehaviour
 
         // finish collecting the package
         manipulatedMat.OnReceiveComplete();
+
+        // reset packages pivot
+        SortPackage();
     }
 
     /// <summary>
@@ -351,6 +361,9 @@ public class Drone : MonoBehaviour
     {
         // finish placing the package
         manipulatedDemand.OnReceiveComplete(packages);
+
+        // reset packages pivot
+        SortPackage();
     }
 
     /// <summary>
@@ -374,6 +387,46 @@ public class Drone : MonoBehaviour
         {
             packages[i].UpdateIconPosition(origin, i);
         }
+    }
+
+    /// <summary>
+    /// Method to sort the position of the boxes carried by the drone
+    /// the sorted positions depend on the package quantity
+    /// </summary>
+    void SortPackage()
+    {
+        // return if the drone is not carrying any package
+        if (packages.Count == 0)
+            return;
+
+        // check how many packages is the drone carrying
+        if (packages.Count == 1)
+        {
+            packages[0].SetBoxPivot(Vector3.down * 0.075f, Vector3.zero);
+        }
+        else
+        {
+            var gap = 360f / packages.Count;
+            for (int i = 1; i < packages.Count + 1; i++)
+            {
+                var angle = i * gap;
+                var polarX = 0.2f * Mathf.Cos(angle * Mathf.Deg2Rad);
+                var polarZ = 0.2f * Mathf.Sin(angle * Mathf.Deg2Rad);
+                var polarPos = new Vector3(polarX, -0.1f, polarZ);
+                packages[i - 1].SetBoxPivot(polarPos, -polarPos);               
+            }
+        }
+    }
+    #endregion
+
+    #region Obstacles
+    /// <summary>
+    /// Method for drones to change speed based on the given factor
+    /// </summary>
+    /// <param name="factor">factor of speed</param>
+    public void ChangeSpeed(float factor)
+    {
+        currentSpeed = speed * factor;
     }
     #endregion
 }

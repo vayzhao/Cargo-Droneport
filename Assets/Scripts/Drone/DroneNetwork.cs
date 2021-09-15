@@ -9,9 +9,12 @@ using UnityEngine;
 [Serializable]
 public class DroneData
 {
-    private Drone script;
+    public Drone script;
+    public bool speedDebuff;
+    public Vector3 position { get { return transform.position; } }
+    
     private Vector3 startLoc;
-    private Transform transform;
+    private Transform transform;    
 
     public DroneData(Transform refTransform)
     {
@@ -22,12 +25,12 @@ public class DroneData
 
     public bool IsCollidingWith(DroneData other)
     {
-        return (transform.position - other.transform.position).sqrMagnitude <= Blackboard.DISTANCE_DRONE_COLLISION;
+        return (position - other.position).sqrMagnitude <= Blackboard.DISTANCE_DRONE_COLLISION;
     }
 
     public Vector3 FindHitPoint(DroneData other)
     {
-        return (transform.position + other.transform.position)/ 2f;
+        return (position + other.position)/ 2f;
     }
 
     public void ReturnToBase()

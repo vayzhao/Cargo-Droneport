@@ -79,7 +79,7 @@ public class Mouse : MonoBehaviour
         if (Physics.Raycast(ray, out hit, Mathf.Infinity,Blackboard.droneMask))
         {
             // when drone is captured, issue the second camera to track it
-            // trackingWindow.TrackObject(hit.collider.gameObject);
+            trackingWindow.TrackObject(hit.collider.gameObject);
             dronePath.Select(hit.collider.gameObject);
         }
     }

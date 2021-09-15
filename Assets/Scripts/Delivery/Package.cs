@@ -64,4 +64,15 @@ public class Package
     /// </summary>
     /// <returns></returns>
     public int GetPackageItemId() { return item.itemId; }
+
+    /// <summary>
+    /// Method to reset box's position and rotation
+    /// </summary>
+    /// <param name="pos">new local position</param>
+    /// <param name="angles">new local euler angles</param>
+    public void SetBoxPivot(Vector3 pos, Vector3 angles)
+    {
+        box.localPosition = pos;
+        box.localEulerAngles = angles;
+    }
 }
