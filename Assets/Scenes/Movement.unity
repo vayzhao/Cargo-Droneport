@@ -2826,6 +2826,30 @@ PrefabInstance:
       propertyPath: spawnSpotParent
       value: 
       objectReference: {fileID: 1843376554}
+    - target: {fileID: 1198851243, guid: bc84c61625a1bcb409d445403a3d14e4, type: 3}
+      propertyPath: allItems.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1198851243, guid: bc84c61625a1bcb409d445403a3d14e4, type: 3}
+      propertyPath: allItems.Array.data[0].sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 03849c107963d734d9abfc9a210ee2c0,
+        type: 3}
+    - target: {fileID: 1198851243, guid: bc84c61625a1bcb409d445403a3d14e4, type: 3}
+      propertyPath: allItems.Array.data[1].sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 790ef0041bdf9a4438467fdd14bf1076,
+        type: 3}
+    - target: {fileID: 1198851243, guid: bc84c61625a1bcb409d445403a3d14e4, type: 3}
+      propertyPath: allItems.Array.data[2].sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 8ffb75788102b384cbce2ff53b78ba0f,
+        type: 3}
+    - target: {fileID: 1198851243, guid: bc84c61625a1bcb409d445403a3d14e4, type: 3}
+      propertyPath: allItems.Array.data[3].sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 3a8d9ce29988be247a85291a7faebc1d,
+        type: 3}
     - target: {fileID: 1198851244, guid: bc84c61625a1bcb409d445403a3d14e4, type: 3}
       propertyPath: fxCanvas
       value: 
