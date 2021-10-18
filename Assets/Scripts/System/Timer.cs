@@ -12,7 +12,7 @@ public class Timer : MonoBehaviour
     public bool timerIsRunning = false;
 
     // Call GameOver function
-    //public GameObject gameManager;
+    public GameObject gameOver;
 
     public Text timeText;
 
@@ -35,8 +35,8 @@ public class Timer : MonoBehaviour
 
             else
             {
-                Debug.Log("Time over");
-                //gameManager.GetComponent<GameManager>().GameOver();
+                //Debug.Log("Time over");
+                gameOver.SetActive(true);
             }
 
             DisplayTime(timeLeft);
