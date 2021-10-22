@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 /// <summary>
 /// The core script of drones
-/// <para>Contributor: Weizhao</para>
+/// <para>Contributor: Weizhao, Grace</para>
 /// </summary>
 
 public class Drone : MonoBehaviour
@@ -32,7 +32,10 @@ public class Drone : MonoBehaviour
     public List<Vector3> pathingLocs;
     [HideInInspector]
     public List<GameObject> pathingDots;
-    
+
+    //Get player score
+    public Score score;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -360,6 +363,7 @@ public class Drone : MonoBehaviour
     void LandForPlacing()
     {
         // finish placing the package
+        score.Money(20);
         manipulatedDemand.OnReceiveComplete(packages);
 
         // reset packages pivot
