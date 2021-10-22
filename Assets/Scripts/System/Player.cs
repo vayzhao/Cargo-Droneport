@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 /// <summary>
 /// This is where money and reputation stats are held.
@@ -9,11 +8,8 @@ using UnityEngine.UI;
 /// Contributor: Grace
 /// </summary>
 
-public class Score : MonoBehaviour
+public class Player : MonoBehaviour
 {
-    public Text scoreText;
-    public int money = 0;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -23,11 +19,16 @@ public class Score : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        scoreText.text = "$" + money.ToString();
+        
     }
 
-    public void Money(int paidMoney)
+    public void Money()
     {
-        money += paidMoney; 
+
+    }
+
+    public void Reputation()
+    {
+
     }
 }
