@@ -9,10 +9,12 @@ using UnityEngine.UI;
 /// </summary>
 public class Mat : MonoBehaviour
 {
+    [Tooltip("the image component that display the item icon")]
+    public Image itemTexture;
     [HideInInspector]
     public Item item;         // the item data of the material
     [HideInInspector]            
-    public Transform box;     // the box model to represents the material
+    public Transform box;     // the box model to represents the material    
     private Spot spot;        // the sapwn spot used by this material
     private Transform canvas; // the canvas to display material's icon 
 
@@ -37,7 +39,9 @@ public class Mat : MonoBehaviour
 
         // find the canvas
         canvas = transform.GetChild(1);
-        canvas.GetComponentInChildren<Image>().sprite = item.sprite;
+
+        // change the item icon
+        itemTexture.sprite = item.sprite;
     }
 
     /// <summary>

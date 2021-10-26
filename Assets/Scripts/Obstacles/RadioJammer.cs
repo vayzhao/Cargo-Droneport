@@ -14,19 +14,19 @@ public class Emitter
 
     public Emitter(Transform emitter)
     {
-        // find the model object of the emitter
-        model = emitter;
-        modelMat = model.GetComponent<Renderer>().material;
-
         // find the wave object of the emitter
-        wave = model.GetChild(0);        
+        wave = emitter.GetChild(0);        
         waveMat = wave.GetComponent<Renderer>().material;
+
+        // find the model object of the emitter
+        model = emitter.GetChild(1);
+        //modelMat = model.GetComponent<Renderer>().material;
     }
 
     public bool IsInRange(Vector3 pos, float distance)
     {
-        Debug.Log((model.position - pos).sqrMagnitude);
-        return (model.position - pos).sqrMagnitude <= distance * distance;
+        Debug.Log((wave.position - pos).sqrMagnitude);
+        return (wave.position - pos).sqrMagnitude <= distance * distance;
     }
 
     public void SetState(bool value, float duration)
@@ -34,7 +34,7 @@ public class Emitter
         isWorking = value;
         durationRemain += duration;
         wave.gameObject.SetActive(value);
-        modelMat.color = value ? Color.red : Color.green;
+        //modelMat.color = value ? Color.red : Color.green;
     }
 
     public void UpdateWaveOffset()

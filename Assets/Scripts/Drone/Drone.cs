@@ -42,7 +42,7 @@ public class Drone : MonoBehaviour
         // find core components of the drone
         animator = GetComponent<Animator>();
         boxCollider = GetComponent<BoxCollider>();
-        pathingLine = GetComponent<LineRenderer>();
+        pathingLine = GetComponentInChildren<LineRenderer>();
 
         // initialize packages and pathing data
         packages = new List<Package>();
@@ -406,7 +406,7 @@ public class Drone : MonoBehaviour
         // check how many packages is the drone carrying
         if (packages.Count == 1)
         {
-            packages[0].SetBoxPivot(Vector3.down * 0.075f, Vector3.zero);
+            packages[0].SetBoxPivot(Vector3.down * 0.15f, Vector3.zero);
         }
         else
         {

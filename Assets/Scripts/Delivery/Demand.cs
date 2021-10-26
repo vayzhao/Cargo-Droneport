@@ -9,6 +9,8 @@ using UnityEngine.UI;
 /// </summary>
 public class Demand : MonoBehaviour
 {
+    [Tooltip("the image component that display the item icon")]
+    public Image itemTexture;
     private Spot spot;    // the spawn spot used by this demand
     private Transform canvas;  // the canvas to display demand's icon
     private Item requiredItem; // the item data of the demand
@@ -30,7 +32,9 @@ public class Demand : MonoBehaviour
 
         // find the canvas
         canvas = transform.GetChild(0);
-        canvas.GetComponentInChildren<Image>().sprite = requiredItem.sprite;
+
+        // change the item icon
+        itemTexture.sprite = requiredItem.sprite;
     }
 
     /// <summary>

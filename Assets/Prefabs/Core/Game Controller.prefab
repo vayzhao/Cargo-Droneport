@@ -49,6 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0148eda99e4f41e4d8eda3281ad5e013, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameOverUI: {fileID: 0}
 --- !u!114 &8208127682609758666
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -109,23 +110,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   allItems:
   - itemId: 0
-    sprite: {fileID: 21300000, guid: 592fc61b7e7d7044fbcd596dd5945602, type: 3}
+    sprite: {fileID: 21300000, guid: 8ffb75788102b384cbce2ff53b78ba0f, type: 3}
   - itemId: 1
-    sprite: {fileID: 21300000, guid: 897d6a30f26751b49acc4368ff457090, type: 3}
+    sprite: {fileID: 21300000, guid: 790ef0041bdf9a4438467fdd14bf1076, type: 3}
   - itemId: 2
-    sprite: {fileID: 21300000, guid: 6534cbd0f31779a499c728a176563774, type: 3}
+    sprite: {fileID: 21300000, guid: 03849c107963d734d9abfc9a210ee2c0, type: 3}
   - itemId: 3
-    sprite: {fileID: 21300000, guid: 866e7c80635b23247a00e71b3b90fe7a, type: 3}
-  - itemId: 4
-    sprite: {fileID: 21300000, guid: 436a11c0d4c78fe46bebdb6f1db5cc18, type: 3}
-  - itemId: 5
-    sprite: {fileID: 21300000, guid: d400cd17e4919814da6ad67f29d24f9a, type: 3}
-  - itemId: 6
-    sprite: {fileID: 21300000, guid: 717ec723bc3e77d4c9c8e8b04e43d552, type: 3}
-  - itemId: 7
-    sprite: {fileID: 21300000, guid: 84aa4a512e14a7a47941217fa10156a7, type: 3}
-  - itemId: 8
-    sprite: {fileID: 21300000, guid: ff62d753ec7a4b148bf086c2bf7e7f7a, type: 3}
+    sprite: {fileID: 21300000, guid: 3a8d9ce29988be247a85291a7faebc1d, type: 3}
 --- !u!114 &1198851244
 MonoBehaviour:
   m_ObjectHideFlags: 0

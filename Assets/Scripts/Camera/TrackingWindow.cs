@@ -84,7 +84,7 @@ public class TrackingWindow : MonoBehaviour
         if (change != 0f)
         {
             // rescale the zoom level and compute the new size for the tracking window
-            zoomScale = Mathf.Clamp(zoomScale + change * Time.deltaTime, 0f, 1f);
+            zoomScale = Mathf.Clamp(zoomScale + change * Time.deltaTime * 5f, 0f, 1f);
             var newSize = Mathf.Lerp(minSize, maxSize, zoomScale);
 
             // update the size for the tracking window
