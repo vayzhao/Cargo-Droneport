@@ -31,7 +31,7 @@ public class DemandSpawner : MonoBehaviour
     [HideInInspector]
     public List<Spot> spots;
 
-    private float spawnInterval = 9f;
+    private float spawnInterval = 4f;
     private float checkInterval = 2f;
     private int demandRequiredCount;
     private int[] demandRequiredItemIds;

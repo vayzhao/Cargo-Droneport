@@ -94,6 +94,9 @@ public class DroneNetwork : MonoBehaviour
         explodeFx.transform.position = hitPoint;
         Destroy(explodeFx, 3f);
 
+        // play sound effect
+        FindObjectOfType<AudioManager>().PlayBombSound();
+
         // return this 2 drones to the base
         droneA.ReturnToBase();
         droneB.ReturnToBase();

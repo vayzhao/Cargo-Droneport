@@ -16,14 +16,20 @@ using System.Linq;
 
 public class SettingsMenu : MonoBehaviour
 {
-    public AudioMixer audioMixer;
+    //public AudioMixer audioMixer;
     public Dropdown resolutionDropdown;
-
+    public Slider volumeSlider;
     Resolution[] resolutions;
 
     void Start()
     {
         GetResolutions();
+
+        var volume = PlayerPrefs.GetFloat("volume");
+        if (volume == 0f)
+            volume = 1f;
+        volumeSlider.value = volume;
+
         //resolutions = Screen.resolutions;
 
         // Clear resolutions in dropdown
@@ -79,7 +85,11 @@ public class SettingsMenu : MonoBehaviour
     // Change volume
     public void SetVolume(float volume)
     {
-        audioMixer.SetFloat("volume", volume);
+        PlayerPrefs.SetFloat("volume", volume);
+        FindObjectOfType<AudioSource>().volume = volume;
+
+        //audioMixer is no need if we have 1 channel only
+        //audioMixer.SetFloat("volume", volume);
     }
 
     // Change quality of graphics
@@ -91,8 +101,6 @@ public class SettingsMenu : MonoBehaviour
     // Enable/Disable fullscreen
     public void SetFullscreen(bool isFullscreen)
     {
-        
-
         // automatically change to the best resolution when switching to full screen
         if (isFullscreen)
             SetResolution(resolutions.Length - 1);

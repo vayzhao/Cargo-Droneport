@@ -353,6 +353,9 @@ public class Drone : MonoBehaviour
         // finish collecting the package
         manipulatedMat.OnReceiveComplete();
 
+        // play sound effect
+        FindObjectOfType<AudioManager>().PlayPickUpSound();
+
         // reset packages pivot
         SortPackage();
     }
@@ -365,6 +368,9 @@ public class Drone : MonoBehaviour
         // finish placing the package
         score.Money(20);
         manipulatedDemand.OnReceiveComplete(packages);
+
+        // play sound effect
+        FindObjectOfType<AudioManager>().PlayPlaceSound();
 
         // reset packages pivot
         SortPackage();

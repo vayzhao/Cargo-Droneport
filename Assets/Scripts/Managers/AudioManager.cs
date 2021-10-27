@@ -8,8 +8,34 @@ using UnityEngine;
 /// </summary>
 public class AudioManager : MonoBehaviour
 {
-    private static AudioSource bgmChannel; // channel used to play bgm
-    private static AudioSource sfxChannel; // channel used to play sfx
+    public AudioSource bgmSource; // channel used to play bgm
+    public AudioSource sfxSource; // channel used to play sfx
+
+    public AudioClip sfx_pickUp;
+    public AudioClip sfx_place;
+    public AudioClip sfx_bomb;
+
+    void Start()
+    {
+        var volume = PlayerPrefs.GetFloat("volume");
+        bgmSource.volume = volume;
+        sfxSource.volume = volume;
+
+    }
+
+    public void PlayPickUpSound()
+    {
+        sfxSource.PlayOneShot(sfx_pickUp);
+    }
+    public void PlayPlaceSound()
+    {
+        sfxSource.PlayOneShot(sfx_place);
+    }
+
+    public void PlayBombSound()
+    {
+        sfxSource.PlayOneShot(sfx_bomb);
+    }
 
     /// <summary>
     /// Method to initialize bgm & sfx channels by creating

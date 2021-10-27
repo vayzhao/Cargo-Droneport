@@ -11,13 +11,15 @@ using UnityEngine.UI;
 
 public class Score : MonoBehaviour
 {
+    public bool isCounting;
+
     public Text scoreText;
     public int money = 0;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        isCounting = true;
     }
 
     // Update is called once per frame
@@ -28,6 +30,9 @@ public class Score : MonoBehaviour
 
     public void Money(int paidMoney)
     {
+        if (!isCounting)
+            return;
+
         money += paidMoney; 
     }
 }
