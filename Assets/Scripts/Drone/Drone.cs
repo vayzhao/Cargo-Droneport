@@ -40,7 +40,7 @@ public class Drone : MonoBehaviour
     void Start()
     {
         // find core components of the drone
-        animator = GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator>();
         boxCollider = GetComponent<BoxCollider>();
         pathingLine = GetComponentInChildren<LineRenderer>();
 
