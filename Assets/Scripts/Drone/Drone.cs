@@ -74,6 +74,8 @@ public class Drone : MonoBehaviour
                 break;
         }
 
+        animator.SetBool("IsMoving", fsm == DroneFSM.Move);
+
         UpdateCarriedMatIcon();
     }
 
